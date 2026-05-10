@@ -63,10 +63,10 @@ namespace DBproject__Spa_Management_
                 cmd.Parameters.AddWithValue("@sessionid", int.Parse(textBox4.Text));
                 cmd.Parameters.AddWithValue("@clientid", int.Parse(textBox3.Text));
                 cmd.Parameters.AddWithValue("@spaid", int.Parse(textBox9.Text));
-                cmd.Parameters.AddWithValue("@serviceid", int.Parse(textBox5.Text));
+                cmd.Parameters.AddWithValue("@serviceid", (textBox5.Text));
                 cmd.Parameters.AddWithValue("@therapistid", int.Parse(textBox11.Text));
                 cmd.Parameters.AddWithValue("@date", textBox8.Text);
-                cmd.Parameters.AddWithValue("@time", textBox6.Text);
+                cmd.Parameters.AddWithValue("@time", DateTime.Parse(textBox8.Text + " " + textBox6.Text));
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Booking Added Successfully!");
