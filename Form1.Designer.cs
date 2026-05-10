@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
@@ -58,6 +59,37 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.spaManagementDataSet = new DBproject__Spa_Management_.SpaManagementDataSet();
+            this.cLIENTBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cLIENTTableAdapter = new DBproject__Spa_Management_.SpaManagementDataSetTableAdapters.CLIENTTableAdapter();
+            this.pHONEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cLIENTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fIRSTNAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lASTNAMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.eMAILDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.sESSIONBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.sESSIONTableAdapter = new DBproject__Spa_Management_.SpaManagementDataSetTableAdapters.SESSIONTableAdapter();
+            this.sESSIONIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cLIENTIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sPAIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sERVICEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tHERAPISTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sESSIONDATEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sESSIONTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sTATUSDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaManagementDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cLIENTBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
@@ -97,7 +129,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(559, 568);
+            this.button1.Location = new System.Drawing.Point(435, 568);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 23);
             this.button1.TabIndex = 5;
@@ -107,7 +139,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(366, 568);
+            this.button2.Location = new System.Drawing.Point(272, 568);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(127, 23);
             this.button2.TabIndex = 6;
@@ -117,7 +149,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(176, 568);
+            this.button3.Location = new System.Drawing.Point(130, 568);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(111, 23);
             this.button3.TabIndex = 7;
@@ -310,11 +342,241 @@
             this.textBox12.Size = new System.Drawing.Size(100, 22);
             this.textBox12.TabIndex = 29;
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(594, 568);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(130, 23);
+            this.button5.TabIndex = 30;
+            this.button5.Text = "UpdateSession";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(765, 568);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(112, 23);
+            this.button6.TabIndex = 31;
+            this.button6.Text = "UpdateClient";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(914, 567);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(110, 23);
+            this.button7.TabIndex = 32;
+            this.button7.Text = "ShowClients";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(1066, 567);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(117, 23);
+            this.button8.TabIndex = 33;
+            this.button8.Text = "ShowSessions";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.pHONEDataGridViewTextBoxColumn,
+            this.cLIENTIDDataGridViewTextBoxColumn,
+            this.fIRSTNAMEDataGridViewTextBoxColumn,
+            this.lASTNAMEDataGridViewTextBoxColumn,
+            this.eMAILDataGridViewTextBoxColumn,
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn,
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.cLIENTBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(419, 30);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(927, 216);
+            this.dataGridView1.TabIndex = 34;
+            // 
+            // spaManagementDataSet
+            // 
+            this.spaManagementDataSet.DataSetName = "SpaManagementDataSet";
+            this.spaManagementDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // cLIENTBindingSource
+            // 
+            this.cLIENTBindingSource.DataMember = "CLIENT";
+            this.cLIENTBindingSource.DataSource = this.spaManagementDataSet;
+            // 
+            // cLIENTTableAdapter
+            // 
+            this.cLIENTTableAdapter.ClearBeforeFill = true;
+            // 
+            // pHONEDataGridViewTextBoxColumn
+            // 
+            this.pHONEDataGridViewTextBoxColumn.DataPropertyName = "PHONE";
+            this.pHONEDataGridViewTextBoxColumn.HeaderText = "PHONE";
+            this.pHONEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.pHONEDataGridViewTextBoxColumn.Name = "pHONEDataGridViewTextBoxColumn";
+            this.pHONEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // cLIENTIDDataGridViewTextBoxColumn
+            // 
+            this.cLIENTIDDataGridViewTextBoxColumn.DataPropertyName = "CLIENT_ID";
+            this.cLIENTIDDataGridViewTextBoxColumn.HeaderText = "CLIENT_ID";
+            this.cLIENTIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.cLIENTIDDataGridViewTextBoxColumn.Name = "cLIENTIDDataGridViewTextBoxColumn";
+            this.cLIENTIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // fIRSTNAMEDataGridViewTextBoxColumn
+            // 
+            this.fIRSTNAMEDataGridViewTextBoxColumn.DataPropertyName = "FIRST_NAME";
+            this.fIRSTNAMEDataGridViewTextBoxColumn.HeaderText = "FIRST_NAME";
+            this.fIRSTNAMEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.fIRSTNAMEDataGridViewTextBoxColumn.Name = "fIRSTNAMEDataGridViewTextBoxColumn";
+            this.fIRSTNAMEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // lASTNAMEDataGridViewTextBoxColumn
+            // 
+            this.lASTNAMEDataGridViewTextBoxColumn.DataPropertyName = "LAST_NAME";
+            this.lASTNAMEDataGridViewTextBoxColumn.HeaderText = "LAST_NAME";
+            this.lASTNAMEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.lASTNAMEDataGridViewTextBoxColumn.Name = "lASTNAMEDataGridViewTextBoxColumn";
+            this.lASTNAMEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // eMAILDataGridViewTextBoxColumn
+            // 
+            this.eMAILDataGridViewTextBoxColumn.DataPropertyName = "EMAIL";
+            this.eMAILDataGridViewTextBoxColumn.HeaderText = "EMAIL";
+            this.eMAILDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.eMAILDataGridViewTextBoxColumn.Name = "eMAILDataGridViewTextBoxColumn";
+            this.eMAILDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // mEMBERSHIPDATEDataGridViewTextBoxColumn
+            // 
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn.DataPropertyName = "MEMBERSHIP_DATE";
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn.HeaderText = "MEMBERSHIP_DATE";
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn.Name = "mEMBERSHIPDATEDataGridViewTextBoxColumn";
+            this.mEMBERSHIPDATEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // mEMBERSHIPTYPEDataGridViewTextBoxColumn
+            // 
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn.DataPropertyName = "MEMBERSHIP_TYPE";
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn.HeaderText = "MEMBERSHIP_TYPE";
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn.Name = "mEMBERSHIPTYPEDataGridViewTextBoxColumn";
+            this.mEMBERSHIPTYPEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.AutoGenerateColumns = false;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.sESSIONIDDataGridViewTextBoxColumn,
+            this.cLIENTIDDataGridViewTextBoxColumn1,
+            this.sPAIDDataGridViewTextBoxColumn,
+            this.sERVICEIDDataGridViewTextBoxColumn,
+            this.tHERAPISTIDDataGridViewTextBoxColumn,
+            this.sESSIONDATEDataGridViewTextBoxColumn,
+            this.sESSIONTIMEDataGridViewTextBoxColumn,
+            this.sTATUSDataGridViewTextBoxColumn});
+            this.dataGridView2.DataSource = this.sESSIONBindingSource;
+            this.dataGridView2.Location = new System.Drawing.Point(419, 269);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 51;
+            this.dataGridView2.RowTemplate.Height = 24;
+            this.dataGridView2.Size = new System.Drawing.Size(927, 217);
+            this.dataGridView2.TabIndex = 35;
+            // 
+            // sESSIONBindingSource
+            // 
+            this.sESSIONBindingSource.DataMember = "SESSION";
+            this.sESSIONBindingSource.DataSource = this.spaManagementDataSet;
+            // 
+            // sESSIONTableAdapter
+            // 
+            this.sESSIONTableAdapter.ClearBeforeFill = true;
+            // 
+            // sESSIONIDDataGridViewTextBoxColumn
+            // 
+            this.sESSIONIDDataGridViewTextBoxColumn.DataPropertyName = "SESSION_ID";
+            this.sESSIONIDDataGridViewTextBoxColumn.HeaderText = "SESSION_ID";
+            this.sESSIONIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sESSIONIDDataGridViewTextBoxColumn.Name = "sESSIONIDDataGridViewTextBoxColumn";
+            this.sESSIONIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // cLIENTIDDataGridViewTextBoxColumn1
+            // 
+            this.cLIENTIDDataGridViewTextBoxColumn1.DataPropertyName = "CLIENT_ID";
+            this.cLIENTIDDataGridViewTextBoxColumn1.HeaderText = "CLIENT_ID";
+            this.cLIENTIDDataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.cLIENTIDDataGridViewTextBoxColumn1.Name = "cLIENTIDDataGridViewTextBoxColumn1";
+            this.cLIENTIDDataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // sPAIDDataGridViewTextBoxColumn
+            // 
+            this.sPAIDDataGridViewTextBoxColumn.DataPropertyName = "SPA_ID";
+            this.sPAIDDataGridViewTextBoxColumn.HeaderText = "SPA_ID";
+            this.sPAIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sPAIDDataGridViewTextBoxColumn.Name = "sPAIDDataGridViewTextBoxColumn";
+            this.sPAIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // sERVICEIDDataGridViewTextBoxColumn
+            // 
+            this.sERVICEIDDataGridViewTextBoxColumn.DataPropertyName = "SERVICE_ID";
+            this.sERVICEIDDataGridViewTextBoxColumn.HeaderText = "SERVICE_ID";
+            this.sERVICEIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sERVICEIDDataGridViewTextBoxColumn.Name = "sERVICEIDDataGridViewTextBoxColumn";
+            this.sERVICEIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // tHERAPISTIDDataGridViewTextBoxColumn
+            // 
+            this.tHERAPISTIDDataGridViewTextBoxColumn.DataPropertyName = "THERAPIST_ID";
+            this.tHERAPISTIDDataGridViewTextBoxColumn.HeaderText = "THERAPIST_ID";
+            this.tHERAPISTIDDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.tHERAPISTIDDataGridViewTextBoxColumn.Name = "tHERAPISTIDDataGridViewTextBoxColumn";
+            this.tHERAPISTIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // sESSIONDATEDataGridViewTextBoxColumn
+            // 
+            this.sESSIONDATEDataGridViewTextBoxColumn.DataPropertyName = "SESSIONDATE";
+            this.sESSIONDATEDataGridViewTextBoxColumn.HeaderText = "SESSIONDATE";
+            this.sESSIONDATEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sESSIONDATEDataGridViewTextBoxColumn.Name = "sESSIONDATEDataGridViewTextBoxColumn";
+            this.sESSIONDATEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // sESSIONTIMEDataGridViewTextBoxColumn
+            // 
+            this.sESSIONTIMEDataGridViewTextBoxColumn.DataPropertyName = "SESSION_TIME";
+            this.sESSIONTIMEDataGridViewTextBoxColumn.HeaderText = "SESSION_TIME";
+            this.sESSIONTIMEDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sESSIONTIMEDataGridViewTextBoxColumn.Name = "sESSIONTIMEDataGridViewTextBoxColumn";
+            this.sESSIONTIMEDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // sTATUSDataGridViewTextBoxColumn
+            // 
+            this.sTATUSDataGridViewTextBoxColumn.DataPropertyName = "STATUS";
+            this.sTATUSDataGridViewTextBoxColumn.HeaderText = "STATUS";
+            this.sTATUSDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.sTATUSDataGridViewTextBoxColumn.Name = "sTATUSDataGridViewTextBoxColumn";
+            this.sTATUSDataGridViewTextBoxColumn.Width = 125;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1092, 726);
+            this.ClientSize = new System.Drawing.Size(1358, 726);
+            this.Controls.Add(this.dataGridView2);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.textBox12);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -348,6 +610,11 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.spaManagementDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cLIENTBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sESSIONBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -385,6 +652,32 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private SpaManagementDataSet spaManagementDataSet;
+        private System.Windows.Forms.BindingSource cLIENTBindingSource;
+        private SpaManagementDataSetTableAdapters.CLIENTTableAdapter cLIENTTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pHONEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cLIENTIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fIRSTNAMEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lASTNAMEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn eMAILDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mEMBERSHIPDATEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mEMBERSHIPTYPEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.BindingSource sESSIONBindingSource;
+        private SpaManagementDataSetTableAdapters.SESSIONTableAdapter sESSIONTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sESSIONIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cLIENTIDDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sPAIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sERVICEIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tHERAPISTIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sESSIONDATEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sESSIONTIMEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sTATUSDataGridViewTextBoxColumn;
     }
 }
 
