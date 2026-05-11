@@ -17,9 +17,9 @@ namespace DBproject__Spa_Management_
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'spaManagementDataSet.SESSION' table. You can move, or remove it, as needed.
+            // TODO: This line of code loads data into the 'spaManagementDataSet.PRODUCT' table. You can move, or remove it, as needed.
+            this.pRODUCTTableAdapter.Fill(this.spaManagementDataSet.PRODUCT);
             this.sESSIONTableAdapter.Fill(this.spaManagementDataSet.SESSION);
-            // TODO: This line of code loads data into the 'spaManagementDataSet.CLIENT' table. You can move, or remove it, as needed.
             this.cLIENTTableAdapter.Fill(this.spaManagementDataSet.CLIENT);
             try
             {
@@ -87,14 +87,21 @@ namespace DBproject__Spa_Management_
         }
 
 
-        //delete product => condition (quentity = 1)
+        //delete product
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("DELETE FROM PRODUCT WHERE QUANTITY = 0", con);
+                SqlCommand cmd = new SqlCommand(
+                    "DELETE FROM PRODUCT WHERE QUANTITY <= REORDER_LIMIT", con);
                 int rows = cmd.ExecuteNonQuery();
-                MessageBox.Show(rows + " Out of Stock Product(s) Deleted Successfully!");
+                MessageBox.Show(rows + " Low Stock Products are Deleted Successfully!");
+
+                SqlCommand cmdSelect = new SqlCommand("SELECT * FROM PRODUCT", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmdSelect);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dataGridView3.DataSource = dt;
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
@@ -154,7 +161,7 @@ namespace DBproject__Spa_Management_
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dataGridView1.DataSource = dt; 
+                dataGridView1.DataSource = dt;
             }
             catch (Exception ex)
             {
@@ -171,7 +178,7 @@ namespace DBproject__Spa_Management_
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                dataGridView2.DataSource = dt; 
+                dataGridView2.DataSource = dt;
             }
             catch (Exception ex)
             {
@@ -184,198 +191,186 @@ namespace DBproject__Spa_Management_
         // =========================
 
         // Inquiry 1  
-        private void btnInquiry1_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = @"
-                    SELECT TOP 1
-                        s.SERVICE_ID,
-                        s.SERVICE_NAME,
-                        s.CATEGORY,
-                        COUNT(ss.SESSION_ID) AS total_bookings
-                    FROM SESSION ss
-                    JOIN SERVICE s ON ss.SERVICE_ID = s.SERVICE_ID
-                    WHERE ss.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
-                      AND ss.STATUS = 'Completed'
-                    GROUP BY s.SERVICE_ID, s.SERVICE_NAME, s.CATEGORY
-                    ORDER BY total_bookings DESC
-                ";
+            SELECT TOP 1
+                s.SERVICE_ID,
+                s.SERVICE_NAME,
+                s.CATEGORY,
+                COUNT(ss.SESSION_ID) AS total_bookings
+            FROM SESSION ss
+            JOIN SERVICE s ON ss.SERVICE_ID = s.SERVICE_ID
+            WHERE ss.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
+              AND ss.STATUS = 'Completed'
+            GROUP BY s.SERVICE_ID, s.SERVICE_NAME, s.CATEGORY
+            ORDER BY total_bookings DESC";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dataGridView4.DataSource = dt;
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
         // Inquiry 2 
-        private void btnInquiry2_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = @"
-                SELECT THERAPIST_ID, NAME
-                FROM THERAPIST
-                WHERE THERAPIST_ID NOT IN (
-                    SELECT THERAPIST_ID
-                    FROM SESSION
-                    WHERE SESSION_DATE >= DATEADD(MONTH, -1, GETDATE())
-                )
-                ";
+            SELECT THERAPIST_ID, NAME
+            FROM THERAPIST
+            WHERE THERAPIST_ID NOT IN (
+                SELECT THERAPIST_ID
+                FROM SESSION
+                WHERE SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
+            )";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dataGridView4.DataSource = dt;
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
+
         // Inquiry 3
-        private void btnInquiry3_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = @"
-                SELECT TOP 1
-                    c.CLIENT_ID,
-                    c.FIRST_NAME + ' ' + c.LAST_NAME AS full_name,
-                    c.EMAIL,
-                    c.MEMBERSHIP_TYPE,
-                    SUM(sv.PRICE) AS total_spent
-                FROM SESSION ss
-                JOIN CLIENT c   ON ss.CLIENT_ID   = c.CLIENT_ID
-                JOIN SERVICE sv ON ss.SERVICE_ID  = sv.SERVICE_ID
-                WHERE sv.CATEGORY = 'Premium'
-                  AND ss.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
-                  AND ss.STATUS = 'Completed'
-                GROUP BY c.CLIENT_ID, c.FIRST_NAME, c.LAST_NAME,
-                         c.EMAIL, c.MEMBERSHIP_TYPE
-                ORDER BY total_spent DESC
-                ";
+            SELECT TOP 1
+                c.CLIENT_ID,
+                c.FIRST_NAME + ' ' + c.LAST_NAME AS full_name,
+                c.EMAIL,
+                c.MEMBERSHIP_TYPE,
+                SUM(sv.PRICE) AS total_spent
+            FROM SESSION ss
+            JOIN CLIENT c   ON ss.CLIENT_ID  = c.CLIENT_ID
+            JOIN SERVICE sv ON ss.SERVICE_ID = sv.SERVICE_ID
+            WHERE sv.CATEGORY = 'Premium'
+              AND ss.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
+              AND ss.STATUS = 'Completed'
+            GROUP BY c.CLIENT_ID, c.FIRST_NAME, c.LAST_NAME,
+                     c.EMAIL, c.MEMBERSHIP_TYPE
+            ORDER BY total_spent DESC";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dataGridView4.DataSource = dt;
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
         // Inquiry 4 
-        private void btnInquiry4_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = @"
-                SELECT
-                    sv.SERVICE_ID,
-                    sv.SERVICE_NAME,
-                    sv.CATEGORY,
-                    sv.PRICE,
-                    sv.DURATION
-                FROM SERVICE sv
-                LEFT JOIN SESSION ss
-                    ON ss.SERVICE_ID = sv.SERVICE_ID
-                   AND ss.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
-                   AND ss.STATUS = 'Completed'
-                WHERE ss.SESSION_ID IS NULL
-                ORDER BY sv.CATEGORY, sv.SERVICE_NAME
-                ";
+            SELECT
+                sv.SERVICE_ID,
+                sv.SERVICE_NAME,
+                sv.CATEGORY,
+                sv.PRICE,
+                sv.DURATION
+            FROM SERVICE sv
+            LEFT JOIN SESSION ss
+                ON ss.SERVICE_ID = sv.SERVICE_ID
+               AND ss.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
+               AND ss.STATUS = 'Completed'
+            WHERE ss.SESSION_ID IS NULL
+            ORDER BY sv.CATEGORY, sv.SERVICE_NAME";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dataGridView4.DataSource = dt;
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
         // Inquiry 5 
-        private void btnInquiry5_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = @"
-                   SELECT
-                    sl.SPA_NAME,
-                    t.THERAPIST_ID,
-                    t.NAME
-                FROM THERAPIST t
-                JOIN SPA_LOCATION sl
-                    ON t.SPA_ID = sl.SPA_ID
-                WHERE NOT EXISTS (
-                    SELECT 1
-                    FROM SESSION s
-                    WHERE s.THERAPIST_ID = t.THERAPIST_ID
-                      AND s.SESSION_DATE >= ADD_MONTHS(SYSDATE, -1)
-)
-                ";
+            SELECT
+                sl.SPA_NAME,
+                t.THERAPIST_ID,
+                t.NAME
+            FROM THERAPIST t
+            JOIN SPA_LOCATION sl ON t.SPA_ID = sl.SPA_ID
+            WHERE NOT EXISTS (
+                SELECT 1 FROM SESSION s
+                WHERE s.THERAPIST_ID = t.THERAPIST_ID
+                AND s.SESSIONDATE >= DATEADD(MONTH, -1, GETDATE())
+            )
+            ORDER BY sl.SPA_NAME";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dataGridView4.DataSource = dt;
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
         // Inquiry 6 
-        private void btnInquiry6_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e)
         {
             try
             {
                 string sql = @"
-                        SELECT
-                            t.THERAPIST_ID,
-                            t.NAME,
-                            t.EMAIL,
-                            t.PHONE,
-                            t.HIRE_DATE,
-                            sl.SPA_NAME,
-                            sl.CITY,
-                            COUNT(ss.SESSION_ID) AS total_completed_sessions
-                        FROM THERAPIST t
-                        JOIN SPA_LOCATION sl ON t.SPA_ID = sl.SPA_ID
-                        LEFT JOIN SESSION ss
-                            ON  ss.THERAPIST_ID = t.THERAPIST_ID
-                           AND ss.STATUS = 'Completed'
-                        GROUP BY t.THERAPIST_ID, t.NAME, t.EMAIL,
-                                 t.PHONE, t.HIRE_DATE,
-                                 sl.SPA_NAME, sl.CITY
-                        ORDER BY total_completed_sessions DESC";
+            SELECT
+                t.THERAPIST_ID,
+                t.NAME,
+                t.EMAIL,
+                t.PHONE,
+                t.HIRE_DATE,
+                sl.SPA_NAME,
+                sl.CITY,
+                COUNT(ss.SESSION_ID) AS total_completed_sessions
+            FROM THERAPIST t
+            JOIN SPA_LOCATION sl ON t.SPA_ID = sl.SPA_ID
+            LEFT JOIN SESSION ss
+                ON ss.THERAPIST_ID = t.THERAPIST_ID
+               AND ss.STATUS = 'Completed'
+            GROUP BY t.THERAPIST_ID, t.NAME, t.EMAIL,
+                     t.PHONE, t.HIRE_DATE,
+                     sl.SPA_NAME, sl.CITY
+            ORDER BY total_completed_sessions DESC";
 
                 using (SqlDataAdapter da = new SqlDataAdapter(sql, con))
                 {
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dataGridView1.DataSource = dt;
+                    dataGridView4.DataSource = dt;
                 }
             }
             catch (Exception ex) { MessageBox.Show("Error: " + ex.Message); }
         }
 
-
+       
     }
 }
-
-
-
-
-
-
-
 
 
